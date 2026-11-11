@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website 4 Slide</title>
+    <style>
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2c3e50;
+        }
+
+        /* Kontainer Utama Slider */
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Desain Setiap Slide */
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: fade 0.5s ease-in-out;
+        }
+
+        .active {
+            display: flex; /* Hanya slide aktif yang ditampilkan */
+        }
+
+        /* Animasi Transisi Halus */
+        @keyframes fade {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+
+        /* Warna Berbeda untuk 4 Slide */
+        .bg-1 { background-color: #3498db; } /* Biru */
+        .bg-2 { background-color: #e74c3c; } /* Merah */
+        .bg-3 { background-color: #2ecc71; } /* Hijau */
+        .bg-4 { background-color: #f1c40f; } /* Kuning */
+
+        /* Tombol Navigasi Kiri & Kanan */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.3s;
+            background-color: rgba(0,0,0,0.3);
+            border: none;
+            user-select: none;
+        }
+        
+        .prev {
+            left: 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <!-- 4 Konten Slide -->
+        <div class="slide active bg-1">Slide 1</div>
+        <div class="slide bg-2">Slide 2</div>
+        <div class="slide bg-3">Slide 3</div>
+        <div class="slide bg-4">Slide 4</div>
+
+        <!-- Tombol Pengendali -->
+        <button class="prev" onclick="ubahSlide(-1)">❮</button>
+        <button class="next" onclick="ubahSlide(1)">❯</button>
+    </div>
+
+    <!-- Logika JavaScript untuk Berpindah Slide -->
+    <script>
+        let indexSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function ubahSlide(n) {
+            // Sembunyikan slide saat ini
+            slides[indexSlide].classList.remove('active');
+            
+            // Tambah atau kurangi index
+            indexSlide += n;
+
+            // Logika Looping: Kembali ke awal atau akhir jika melewati batas
+            if (indexSlide >= slides.length) {
+                indexSlide = 0;
+            } else if (indexSlide < 0) {
+                indexSlide = slides.length - 1;
+            }
+
+            // Tampilkan slide yang baru
+            slides[indexSlide].classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
